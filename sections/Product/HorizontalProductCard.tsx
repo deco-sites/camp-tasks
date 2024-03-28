@@ -15,6 +15,14 @@ export interface Props {
   productPrice: string;
 }
 
+export function ErrorFallback({error}: {error?:Error}) {
+  return (
+    <div className="text-red-800">
+      Error: {error?.message}
+    </div>
+  )
+}
+
 export default function HorizontalProductCard({ products }: Product) {
   return (
     <div className="container">

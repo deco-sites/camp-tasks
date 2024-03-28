@@ -1,3 +1,6 @@
+/**
+ * @title {{code}}
+ */
 export interface CardProps {
   code: string;
   description?: string;
