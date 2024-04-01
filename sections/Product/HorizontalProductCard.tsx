@@ -1,3 +1,4 @@
+import Image from "apps/website/components/Image.tsx";
 import { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface Product {
@@ -13,14 +14,19 @@ export interface Props {
   productName: string;
   productDescription: string;
   productPrice: string;
+  size:
+    | "max-w-xl"
+    | "max-w-2xl"
+    | "max-w-3xl"
+    | "max-w-4xl"
+    | "max-w-5xl"
+    | "max-w-6xl"
+    | "max-w-7xl"
+    | "max-w-full";
 }
 
 export function ErrorFallback({ error }: { error?: Error }) {
-  return (
-    <div className="text-red-800">
-      Error: {error?.message}
-    </div>
-  );
+  return <div className="text-red-800">Error: {error?.message}</div>;
 }
 
 export default function HorizontalProductCard({ products }: Product) {
@@ -29,19 +35,23 @@ export default function HorizontalProductCard({ products }: Product) {
       <ul className="flex flex-col gap-4">
         {products.map((product, index) => (
           <li
-            className="sm:flex gap-2 p-4 rounded-md shadow bg-slate-600 text-slate-200"
+            className={`${product.size} card bg-base-100 shadow-xl flex-row gap-3`}
             key={index}
           >
             <div>
-              <img
+              <Image
                 src={product.image.src}
                 alt={product.image.alt}
-                className="rounded w-full"
+                width={180}
               />
             </div>
-            <div className="flex flex-col gap-2">
-              <h2 className="text-lg font-medium">{product.productName}</h2>
-              <p className="text-sm font-thin">{product.productDescription}</p>
+            <div className="flex flex-col gap-1 py-2">
+              <h2 className="text-lg font-medium">
+                {product.productName}
+              </h2>
+              <p className="text-sm font-thin">
+                {product.productDescription}
+              </p>
               <p className="text-xl font-bold">
                 {product.productPrice && `R$${product.productPrice}`}
               </p>
