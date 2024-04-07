@@ -14,16 +14,18 @@ import Image from "apps/website/components/Image.tsx";
 import NavItem from "./NavItem.tsx";
 import { navbarHeight } from "./constants.ts";
 import { Buttons, Logo } from "../../components/header/Header.tsx";
+import Icons from "deco-sites/camp-tasks/components/ui/Icon.tsx";
 
 // Make it sure to render it on the server only. DO NOT render it on an island
 function Navbar(
-  { items, searchbar, logo, buttons, logoPosition = "left", device }: {
+  { items, searchbar, logo, buttons, logoPosition = "left", device, total }: {
     items: SiteNavigationElement[];
     searchbar?: SearchbarProps;
     logo?: Logo;
     buttons?: Buttons;
     logoPosition?: "left" | "center";
     device: "mobile" | "desktop" | "tablet";
+    total: { total: number };
   },
 ) {
   const platform = usePlatform();
@@ -140,6 +142,10 @@ function Navbar(
             {platform === "nuvemshop" && <CartButtonNuvemshop />}
           </div>
         )}
+        <span className="flex align-middle gap-2">
+          <Icons id="Friends" size={32} />
+          {total.total}
+        </span>
       </div>
     </div>
   );

@@ -1,64 +1,62 @@
-import Image from "apps/website/components/Image.tsx";
-import { ImageWidget } from "apps/admin/widgets.ts";
+import { Product } from "apps/commerce/types.ts";
+import Votes from "deco-sites/camp-tasks/islands/Votes.tsx";
 
-export interface Product {
-  products: Props[];
-}
-
-export interface Props {
-  image: {
-    src: ImageWidget;
-    alt?: string;
-    href?: string;
-  };
-  productName: string;
-  productDescription: string;
-  productPrice: string;
-  size:
-    | "max-w-xl"
-    | "max-w-2xl"
-    | "max-w-3xl"
-    | "max-w-4xl"
-    | "max-w-5xl"
-    | "max-w-6xl"
-    | "max-w-7xl"
-    | "max-w-full";
+export interface Products {
+  items: Product[] | null;
 }
 
 export function ErrorFallback({ error }: { error?: Error }) {
-  return <div className="text-red-800">Error: {error?.message}</div>;
+  return (
+    <div role="alert" className="alert alert-error">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="stroke-current shrink-0 h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+      <span>{error?.message}</span>
+    </div>
+  );
 }
 
-export default function HorizontalProductCard({ products }: Product) {
+export function LoadingFallback() {
   return (
-    <div className="container">
-      <ul className="flex flex-col gap-4">
-        {products.map((product, index) => (
-          <li
-            className={`${product.size} card bg-base-100 shadow-xl flex-row gap-3`}
-            key={index}
-          >
-            <div>
-              <Image
-                src={product.image.src}
-                alt={product.image.alt}
-                width={180}
-              />
-            </div>
-            <div className="flex flex-col gap-1 py-2">
-              <h2 className="text-lg font-medium">
-                {product.productName}
-              </h2>
-              <p className="text-sm font-thin">
-                {product.productDescription}
-              </p>
-              <p className="text-xl font-bold">
-                {product.productPrice && `R$${product.productPrice}`}
-              </p>
-              <button className="btn mt-auto">Comprar</button>
-            </div>
-          </li>
-        ))}
+    <div>
+      <span className="loading loading-spinner loading-lg"></span>
+    </div>
+  );
+}
+
+export default function HorizontalProductCard({ items }: Products) {
+  return (
+    <div className="container mx-auto">
+      <ul className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-2">
+        {items &&
+          items.map((item, index) => (
+            <li className="card w-auto bg-base-100 shadow-xl">
+              <Votes productId={item.productID} />
+              <figure>
+                <img
+                  src={item.image?.[0].url}
+                  alt={item.alternateName}
+                />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title">{item.name}</h2>
+                <p>{item.description}</p>
+                <div className="card-actions justify-end">
+                  <a href={item.url} className="btn btn-primary">Compre</a>
+                </div>
+              </div>
+            </li>
+          ))}
       </ul>
     </div>
   );

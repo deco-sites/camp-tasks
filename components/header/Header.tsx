@@ -8,6 +8,7 @@ import type { SectionProps } from "deco/types.ts";
 import Alert from "./Alert.tsx";
 import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
+import type { Result } from "deco-sites/camp-tasks/loaders/countvotestotal.ts";
 
 export interface Logo {
   src: ImageWidget;
@@ -40,6 +41,8 @@ export interface Props {
   logoPosition?: "left" | "center";
 
   buttons?: Buttons;
+
+  total: Result;
 }
 
 function Header({
@@ -77,6 +80,7 @@ function Header({
   logoPosition = "center",
   buttons,
   device,
+  total = { total: 0 },
 }: SectionProps<typeof loader>) {
   const platform = usePlatform();
   const items = navItems ?? [];
@@ -98,6 +102,7 @@ function Header({
               logo={logo}
               logoPosition={logoPosition}
               buttons={buttons}
+              total={total}
             />
           </div>
         </Drawers>
