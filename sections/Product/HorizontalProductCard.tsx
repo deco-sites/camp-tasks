@@ -1,8 +1,9 @@
 import { Product } from "apps/commerce/types.ts";
 import Votes from "deco-sites/camp-tasks/islands/Votes.tsx";
+import { ProductVariate } from "deco-sites/camp-tasks/flags/multivariate/productVariate.ts";
 
 export interface Products {
-  items: Product[] | null;
+  items: ProductVariate;
 }
 
 export function ErrorFallback({ error }: { error?: Error }) {
@@ -40,7 +41,10 @@ export default function HorizontalProductCard({ items }: Products) {
       <ul className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-2">
         {items &&
           items.map((item, index) => (
-            <li className="card w-auto bg-base-100 shadow-xl">
+            <li
+              className="card w-auto bg-base-100 shadow-xl"
+              key={item.productID}
+            >
               <Votes productId={item.productID} />
               <figure>
                 <img
@@ -52,7 +56,9 @@ export default function HorizontalProductCard({ items }: Products) {
                 <h2 className="card-title">{item.name}</h2>
                 <p>{item.description}</p>
                 <div className="card-actions justify-end">
-                  <a href={item.url} className="btn btn-primary">Compre</a>
+                  <a href={item.url} className="btn btn-primary">
+                    Compre
+                  </a>
                 </div>
               </div>
             </li>
