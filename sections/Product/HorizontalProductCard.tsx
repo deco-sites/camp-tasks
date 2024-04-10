@@ -28,7 +28,7 @@ export function ErrorFallback({ error }: { error?: Error }) {
 
 export function LoadingFallback() {
   return (
-    <div>
+    <div className="flex justify-center py-8">
       <span className="loading loading-spinner loading-lg"></span>
     </div>
   );
@@ -36,7 +36,7 @@ export function LoadingFallback() {
 
 export default function HorizontalProductCard({ items }: Products) {
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto py-5">
       <ul className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-2">
         {items &&
           items.map((item, index) => (
