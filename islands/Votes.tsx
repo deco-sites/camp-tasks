@@ -1,12 +1,13 @@
 import Icons from "deco-sites/camp-tasks/components/ui/Icon.tsx";
 import { useSignal } from "@preact/signals";
 import { invoke } from "deco-sites/camp-tasks/runtime.ts";
+import { toast } from "toastify";
 
 export interface Props {
   productId: string;
 }
 
-export default function Votes({ productId }: Props) {
+export default function Votes({ productId, ...props }: Props) {
   const vote = useSignal(false);
   const voteQtd = useSignal("0");
 
@@ -16,6 +17,7 @@ export default function Votes({ productId }: Props) {
       .then(({ product, total }) => {
         voteQtd.value = String(product);
         vote.value = !vote.value;
+        toast("Produto avaliado!");
       });
   }
 
@@ -26,7 +28,7 @@ export default function Votes({ productId }: Props) {
     });
 
   return (
-    <div className="flex gap-2 p-3">
+    <div className="flex items-center gap-2">
       <button onClick={handleClick} disabled={vote.value}>
         {vote.value
           ? <Icons id="MoodCheck" size={32} />

@@ -1,6 +1,6 @@
-import { Product } from "apps/commerce/types.ts";
 import Votes from "deco-sites/camp-tasks/islands/Votes.tsx";
 import { ProductVariate } from "deco-sites/camp-tasks/flags/multivariate/productVariate.ts";
+import Image from "apps/website/components/Image.tsx";
 
 export interface Products {
   items: ProductVariate;
@@ -38,25 +38,34 @@ export function LoadingFallback() {
 export default function HorizontalProductCard({ items }: Products) {
   return (
     <div className="container mx-auto py-5">
-      <ul className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-2">
+      <ul className="grid grid-cols-1 gap-4">
         {items &&
           items.map((item, index) => (
             <li
-              className="card w-auto bg-base-100 shadow-xl"
               key={item.productID}
+              className=" flex flex-col sm:flex-row gap-4 shadow-xl bg-base-100 rounded-xl p-3"
             >
-              <Votes productId={item.productID} />
               <figure>
-                <img
-                  src={item.image?.[0].url}
+                <Image
+                  width={200}
+                  src={item.image?.[0].url ? item.image?.[0].url : ""}
                   alt={item.alternateName}
+                  className="rounded-xl min-w-full sm:min-w-52"
                 />
               </figure>
-              <div className="card-body">
-                <h2 className="card-title">{item.name}</h2>
-                <p>{item.description}</p>
-                <div className="card-actions justify-end">
-                  <a href={item.url} className="btn btn-primary">
+              <div className=" flex flex-col sm:flex-row justify-between gap-4 w-full">
+                <div className="flex flex-col w-full">
+                  <h2 className="order-2 text-xl font-bold">{item.name}</h2>
+                  <p className="order-3 text-slate-500">{item.description}</p>
+                  <div className="order-1 pb-4">
+                    <Votes productId={item.productID} />
+                  </div>
+                </div>
+                <div className="flex items-end">
+                  <a
+                    href={item.url}
+                    className="btn bg-slate-40 min-w-full sm:min-w-10 uppercase"
+                  >
                     Compre
                   </a>
                 </div>

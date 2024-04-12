@@ -2,6 +2,7 @@ import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
 import { Context } from "deco/deco.ts";
 import Theme from "../sections/Theme/Theme.tsx";
+import ToastComponent from "deco-sites/camp-tasks/islands/Toast.tsx";
 
 const sw = () =>
   addEventListener("load", () =>
@@ -33,6 +34,11 @@ export default defineApp(async (_req, ctx) => {
 
       {/* Rest of Preact tree */}
       <ctx.Component />
+
+      <ToastComponent
+        theme="light"
+        progressStyle={{ height: "3px", background: "red" }}
+      />
 
       {/* Include service worker */}
       <script
