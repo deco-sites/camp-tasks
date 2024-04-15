@@ -38,36 +38,43 @@ export function LoadingFallback() {
 export default function HorizontalProductCard({ items }: Products) {
   return (
     <div className="container mx-auto py-5">
-      <ul className="grid grid-cols-1 gap-4">
+      <ul className="grid grid-cols-1 xl:grid-cols-3 gap-4">
         {items &&
           items.map((item, index) => (
             <li
               key={item.productID}
-              className=" flex flex-col sm:flex-row gap-4 shadow-xl bg-base-100 rounded-xl p-3"
+              className=" flex flex-col sm:flex-row items-center gap-4 shadow-xl bg-base-100 rounded-xl p-4"
             >
               <figure>
                 <Image
                   width={200}
                   src={item.image?.[0].url ? item.image?.[0].url : ""}
                   alt={item.alternateName}
-                  className="rounded-xl min-w-full sm:min-w-52"
+                  className="rounded-xl min-w-full sm:min-w-48"
                 />
               </figure>
-              <div className=" flex flex-col sm:flex-row justify-between gap-4 w-full">
+              <div className=" flex flex-col items-start justify-between gap-4 w-full h-full">
                 <div className="flex flex-col w-full">
-                  <h2 className="order-2 text-xl font-bold">{item.name}</h2>
-                  <p className="order-3 text-slate-500">{item.description}</p>
+                  <h2 className="order-2 text-lg font-bold">
+                    {item.name}
+                  </h2>
+                  <p className="order-3 text-sm text-slate-500">
+                    {item.description}
+                  </p>
                   <div className="order-1 pb-4">
                     <Votes productId={item.productID} />
                   </div>
                 </div>
-                <div className="flex items-end">
+                <div className="mt-auto flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center w-full">
                   <a
                     href={item.url}
-                    className="btn bg-slate-40 min-w-full sm:min-w-10 uppercase"
+                    className="btn bg-slate-40 min-w-full sm:min-w-10 uppercase order-2 sm:order-1"
                   >
                     Compre
                   </a>
+                  <span className="order-1 sm:order-2 text-bold">
+                    R$ {item.offers?.lowPrice.toFixed(2)}
+                  </span>
                 </div>
               </div>
             </li>
