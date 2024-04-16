@@ -63,6 +63,10 @@ function Navbar(
           {platform === "shopify" && <CartButtonShopify />}
           {platform === "nuvemshop" && <CartButtonNuvemshop />}
         </div>
+        <span className="flex align-middle gap-2">
+          <Icons id="Friends" size={32} />
+          <span class="total-votes">{total.total}</span>
+        </span>
       </div>
     );
   }
@@ -144,7 +148,7 @@ function Navbar(
         )}
         <span className="flex align-middle gap-2">
           <Icons id="Friends" size={32} />
-          {total.total}
+          <span class="total-votes">{total.total}</span>
         </span>
       </div>
     </div>

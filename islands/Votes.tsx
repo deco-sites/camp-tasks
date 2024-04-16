@@ -18,6 +18,14 @@ export default function Votes({ productId, ...props }: Props) {
         voteQtd.value = String(product);
         vote.value = !vote.value;
         toast("Produto avaliado!");
+
+        const totalVotesEl = document.querySelectorAll(".total-votes");
+
+        if (totalVotesEl && totalVotesEl.length) {
+          totalVotesEl.forEach((el) => {
+            el.textContent = String(total);
+          });
+        }
       });
   }
 

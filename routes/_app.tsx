@@ -38,6 +38,7 @@ export default defineApp(async (_req, ctx) => {
       <ToastComponent
         theme="light"
         progressStyle={{ height: "3px", background: "red" }}
+        position="top-left"
       />
 
       {/* Include service worker */}

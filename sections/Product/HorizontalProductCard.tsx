@@ -47,7 +47,7 @@ export function LoadingFallback() {
 export default function HorizontalProductCard({ items, size }: Products) {
   return (
     <div className="container mx-auto py-5">
-      <ul className="">
+      <ul className="grid grid-cols-1 gap-4">
         {items &&
           items.map((item, index) => (
             <li
@@ -81,7 +81,7 @@ export default function HorizontalProductCard({ items, size }: Products) {
                   >
                     Compre
                   </a>
-                  <span className="order-1 sm:order-2 text-bold">
+                  <span className="order-1 sm:order-2 font-bold">
                     R$ {item.offers?.lowPrice.toFixed(2)}
                   </span>
                 </div>
