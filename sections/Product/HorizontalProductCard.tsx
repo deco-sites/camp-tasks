@@ -3,6 +3,15 @@ import { ProductVariate } from "deco-sites/camp-tasks/flags/multivariate/product
 import Image from "apps/website/components/Image.tsx";
 
 export interface Products {
+  size:
+    | "max-w-xl"
+    | "max-w-2xl"
+    | "max-w-3xl"
+    | "max-w-4xl"
+    | "max-w-5xl"
+    | "max-w-6xl"
+    | "max-w-7xl"
+    | "max-w-full";
   items: ProductVariate;
 }
 
@@ -35,15 +44,15 @@ export function LoadingFallback() {
   );
 }
 
-export default function HorizontalProductCard({ items }: Products) {
+export default function HorizontalProductCard({ items, size }: Products) {
   return (
     <div className="container mx-auto py-5">
-      <ul className="grid grid-cols-1 xl:grid-cols-3 gap-4">
+      <ul className="">
         {items &&
           items.map((item, index) => (
             <li
               key={item.productID}
-              className=" flex flex-col sm:flex-row items-center gap-4 shadow-xl bg-base-100 rounded-xl p-4"
+              className="flex flex-col sm:flex-row items-center gap-4 shadow-xl bg-base-100 rounded-xl p-4"
             >
               <figure>
                 <Image
