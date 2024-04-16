@@ -77,9 +77,9 @@ export default function HorizontalProductCard({ items, size }: Products) {
                 <div className="mt-auto flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center w-full">
                   <a
                     href={item.url}
-                    className="btn bg-slate-40 min-w-full sm:min-w-10 uppercase order-2 sm:order-1"
+                    className="btn bg-slate-40 min-w-full sm:min-w-10 order-2 sm:order-1"
                   >
-                    Compre
+                    Ver produto
                   </a>
                   <span className="order-1 sm:order-2 font-bold">
                     R$ {item.offers?.lowPrice.toFixed(2)}
